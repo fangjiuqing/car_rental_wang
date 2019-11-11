@@ -19,9 +19,9 @@ class user_module extends base_module {
 
         if ( empty($this->login) ) {
             $url = RGX\router::url('login-index-redirect-' . $current_url);
-            //$this->redirect('login-index-redirect-' . $current_url);
+            $this->redirect('login-index-redirect-' . $current_url);
         }
-        $this->login_user_id = 4;
+        //$this->login_user_id = 4;
         $this->assign('user' , $this->login);
     }
 } // Class End
