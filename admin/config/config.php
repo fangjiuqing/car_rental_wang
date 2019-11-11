@@ -4,7 +4,7 @@ return [
         'pre'       => 'pre_',
         'type'      => 'mysql',
         'mysql'     => [
-             'default'   => 'host=127.0.0.1;port=3306;db=rent;user=rentcar;passwd=fang123wei;charset=utf8;profiling=1',
+             'default'   => 'host=127.0.0.1;port=3306;db=rent;user=root;passwd=fang123wei;charset=utf8;profiling=1',
         ],
     ],
    'CACHE_VER'  => 2,
