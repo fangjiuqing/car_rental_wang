@@ -17,10 +17,10 @@
     </script>
 
 <!-- head 中 -->
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/jquery-weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/iconfont.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/common.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/jquery-weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/iconfont.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/common.css" />
 
 
 
@@ -68,9 +68,7 @@
 <body ontouchstart>
 <div class="weui-flex">
   <div class="weui-flex__item">
-        <div class="placeholder">
-            <span class="fl icon iconfont" onclick="javascript:;history.go(-1);">&#xe6f3;</span>
-            <span class="logo"><?php if ($title):?><?php echo($title);?><?php else:?>在线租车<?php endif;?></span> <?php if ($right_link):?> <span class="fr"><?php echo($right_link);?></span> <?php endif;?></div>
+        <div class="placeholder"> <?php if ($_MODULE != 'index'):?> <span class="fl icon iconfont" onclick="javascript:;history.go(-1);">&#xe6f3;</span> <?php endif;?><span class="logo"><?php if ($title):?><?php echo($title);?><?php else:?>在线租车<?php endif;?></span> <?php if ($right_link):?> <span class="fr"><?php echo($right_link);?></span> <?php endif;?></div>
     </div>
 </div>
 
@@ -98,7 +96,7 @@
 
         <div class="weui-footer">
           <p class="weui-footer__links">
-            <a href="<?php echo(RGX\router::url('index')); ?>" class="weui-footer__link">首页</a>
+            <a href="<?php echo(RGX\router::url('index')); ?>" class="weui-footer__link">预定</a>
             <a href="javascript:void(0);" class="weui-footer__link">关于我们</a>
             <a href="javascript:void(0);" class="weui-footer__link">隐私条款</a>
           </p>
@@ -109,7 +107,7 @@
     <!-- body 最后 -->
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-    <script src="http://localhost/zuchev1/wap/template/default/js/jquery.tools.js"></script>
+    <script src="https://case.isoftware.xyz/static/js/jquery.tools.js"></script>
 
     <script type="text/javascript">
         $(function(){

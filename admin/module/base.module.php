@@ -7,20 +7,26 @@ use re\rgx as RGX;
  * $Id: base.module.php 738 2017-11-21 04:39:27Z reginx $
  */
 class base_module extends RGX\module {
+    // public function __construct ( $params = [] ) {
+    //     parent::__construct($params);
+    // }
     /**
      * 当前登录用户
      * @var null
      */
-    public $login = null;
+    public $admin = null;
 
-    /**
-     * 机构方法
-     * @param array $params [description]
-     */
-    public function __construct ($params = []) {
-        parent::__construct($params);
-        $this->sess();
-        $this->login = $this->sess_get('login');
+    public function sess_get ($key) {
+        session_start();
+        if ( isset($_SESSION[$key]) ) {
+            return $_SESSION[$key];
+        }
+        return null;
+    }
+
+    public function sess_set ($key , $val) {
+        session_start();
+        $_SESSION[$key] = $val;
     }
 
     /**
@@ -28,11 +34,11 @@ class base_module extends RGX\module {
      * @param [type] $user [description]
      */
     public function set_login ($admin) {
-        $this->sess_set('login', $admin);
+        $this->sess_set('admin', $admin);
     }
 
     public function logout_action () {
-        $this->sess_del('login');
+        $this->sess_del('admin');
         $this->redirect('login');
     }
 

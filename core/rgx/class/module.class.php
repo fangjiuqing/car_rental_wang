@@ -59,7 +59,7 @@ class module extends rgx {
      *
      */
     public function sess ($sess_name = null, $sess_id = null, $opts = []) {
-       $this->_sess = app::sess($sess_name, $sess_id);
+       //$this->_sess = app::sess($sess_name, $sess_id);
     }
 
     /**
@@ -68,7 +68,7 @@ class module extends rgx {
      * @return [type]      [description]
      */
     public function sess_get ($key) {
-        return $this->_sess->get($key);
+        //return $this->_sess->get($key);
     }
 
     /**
@@ -78,7 +78,7 @@ class module extends rgx {
      * @return [type]      [description]
      */
     public function sess_set ($key, $val) {
-        return $this->_sess->set($key, $val);
+        //return $this->_sess->set($key, $val);
     }
 
     /**
@@ -87,7 +87,7 @@ class module extends rgx {
      * @return [type]      [description]
      */
     public function sess_del ($key) {
-        return $this->_sess->del($key);
+        //return $this->_sess->del($key);
     }
 
     /**
@@ -95,7 +95,7 @@ class module extends rgx {
      * @return [type] [description]
      */
     public function sess_remove () {
-        return $this->_sess->remove();
+        //return $this->_sess->remove();
     }
 
     /**
@@ -103,7 +103,7 @@ class module extends rgx {
      * @return [type] [description]
      */
     public function sess_id () {
-        return $this->_sess->sess_id();
+        //return $this->_sess->sess_id();
     }
 
     /**

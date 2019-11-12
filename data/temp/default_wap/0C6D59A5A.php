@@ -17,10 +17,10 @@
     </script>
 
 <!-- head 中 -->
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/jquery-weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/iconfont.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/common.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/jquery-weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/iconfont.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/common.css" />
 
 
 
@@ -41,9 +41,7 @@
 <body ontouchstart>
 <div class="weui-flex">
   <div class="weui-flex__item">
-        <div class="placeholder">
-            <span class="fl icon iconfont" onclick="javascript:;history.go(-1);">&#xe6f3;</span>
-            <span class="logo"><?php if ($title):?><?php echo($title);?><?php else:?>在线租车<?php endif;?></span> <?php if ($right_link):?> <span class="fr"><?php echo($right_link);?></span> <?php endif;?></div>
+        <div class="placeholder"> <?php if ($_MODULE != 'index'):?> <span class="fl icon iconfont" onclick="javascript:;history.go(-1);">&#xe6f3;</span> <?php endif;?><span class="logo"><?php if ($title):?><?php echo($title);?><?php else:?>在线租车<?php endif;?></span> <?php if ($right_link):?> <span class="fr"><?php echo($right_link);?></span> <?php endif;?></div>
     </div>
 </div>
 
@@ -64,7 +62,7 @@
                     <label class="weui-label">联系姓名</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="fullname" id="fullname" placeholder="请输入联系人">
+                    <input class="weui-input" type="text" name="fullname" id="fullname" placeholder="请输入联系人" value="<?php echo($user['user_name']);?>">
                 </div>
             </div>
 
@@ -73,7 +71,7 @@
                     <label class="weui-label">学生学号</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="sno" id="sno" placeholder="请输入学生学号">
+                    <input class="weui-input" type="text" name="sno" id="sno" placeholder="请输入学生学号" value="<?php echo($user['user_sno']);?>">
                 </div>
             </div>
 
@@ -82,7 +80,7 @@
                     <label class="weui-label">所在学校</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="sname" id="sname" placeholder="请输入所在学校">
+                    <input class="weui-input" type="text" name="sname" id="sname" placeholder="请输入所在学校" value="<?php echo($user['user_sname']);?>">
                 </div>
             </div>
 
@@ -91,7 +89,7 @@
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" name="mobile" id="mobile" placeholder="请输入手机号">
+                    <input class="weui-input" type="tel" name="mobile" id="mobile" placeholder="请输入手机号" value="<?php echo($user['user_mobile']);?>">
                 </div>
                 <div class="weui-cell__ft" style="display: none;" id="mobileerror">
                     <i class="weui-icon-warn"></i>
@@ -125,7 +123,7 @@
 
         <div class="weui-footer">
           <p class="weui-footer__links">
-            <a href="<?php echo(RGX\router::url('index')); ?>" class="weui-footer__link">首页</a>
+            <a href="<?php echo(RGX\router::url('index')); ?>" class="weui-footer__link">预定</a>
             <a href="javascript:void(0);" class="weui-footer__link">关于我们</a>
             <a href="javascript:void(0);" class="weui-footer__link">隐私条款</a>
           </p>
@@ -136,7 +134,7 @@
     <!-- body 最后 -->
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-    <script src="http://localhost/zuchev1/wap/template/default/js/jquery.tools.js"></script>
+    <script src="https://case.isoftware.xyz/static/js/jquery.tools.js"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -175,22 +173,30 @@
         });
     </script>
 
-<script type="text/javascript" src="http://localhost/zuchev1/wap/template/default/js/libs/swiper.js"></script>
+<script type="text/javascript" src="https://case.isoftware.xyz/static/js/libs/swiper.js"></script>
 <script>
 var post_data = $.getParamsStorage('choice-car');
 if ( post_data != undefined ) {
 
     if ( post_data.fullname != undefined ) {
-        $('#fullname').val(post_data.fullname);
+        if ( $('#fullname').val() == '' ) {
+            $('#fullname').val(post_data.fullname);
+        }
     }
     if ( post_data.sno != undefined ) {
-        $('#sno').val(post_data.sno);
+        if ( $('#sno').val() == '' ) {
+            $('#sno').val(post_data.sno);
+        }
     }
     if ( post_data.sname != undefined ) {
-        $('#sname').val(post_data.sname);
+        if ( $('#sname').val() == '' ) {
+            $('#sname').val(post_data.sname);
+        }
     }
     if ( post_data.mobile != undefined ) {
-        $('#mobile').val(post_data.mobile);
+        if ( $('#mobile').val() == '' ) {
+            $('#mobile').val(post_data.mobile);
+        }
     }
     if ( post_data.start_time != undefined ) {
         $('#start_time').val(post_data.start_time);

@@ -17,10 +17,10 @@
     </script>
 
 <!-- head 中 -->
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/jquery-weui.min.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/iconfont.css" />
-<link rel="stylesheet" href="http://localhost/zuchev1/wap/template/default/style/common.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/jquery-weui.min.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/iconfont.css" />
+<link rel="stylesheet" href="https://case.isoftware.xyz/static/style/common.css" />
 
 
 
@@ -93,7 +93,7 @@
     <!-- body 最后 -->
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-    <script src="http://localhost/zuchev1/wap/template/default/js/jquery.tools.js"></script>
+    <script src="https://case.isoftware.xyz/static/js/jquery.tools.js"></script>
 
     <script type="text/javascript">
         $(function(){

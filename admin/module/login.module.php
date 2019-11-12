@@ -8,25 +8,19 @@ use \re\rgx as RGX;
  */
 class login_module extends base_module {
     /**
+     * 架构方法
+     * @param array $params [description]
+     */
+    // public function __construct ($params = []) {
+    //     parent::__construct($params);
+    // }
+
+    /**
      * 管理平台主页
      * @return [type] [description]
      */
     public function index_action () {
-        // $path = ini_get('session.save_path');
-
-        // //var_dump($path,is_writable($path));die;
-        // session_start();
-        // $_SESSION['hello'] = 'world';
-        $row = [
-            'type' => 'write',
-            'msg'  => 'I am ok'
-        ];
-        $this->set_login($row);
-
-
-
-
-        if (!empty($this->login)) {
+        if (!empty($this->admin)) {
             $this->redirect('index');
         }
         if ($this->has('isajax', 'p')) {
@@ -53,6 +47,7 @@ class login_module extends base_module {
      * @return [type] [description]
      */
     private function submit ($adm) {
+        session_start();
         $last_verify = $this->sess_get('adm_login_verify');
         if ($last_verify > RGX\app::get_time() + 300) {
             $geetest_challenge = $this->get('geetest_challenge', 'p');
@@ -96,8 +91,6 @@ class login_module extends base_module {
             $this->ajax_failure(['admin_passwd' => '您输入的密码不正确']);
         }
 
-        $this->set_login($row);
-
         $row['admin_lastlogin_date']    =    REQUEST_TIME;
         if ( $obj->load($row) ) {
             $ret = $obj->save();
@@ -108,6 +101,8 @@ class login_module extends base_module {
         else {
             $this->ajax_failure($obj->get_error());
         }
+
+        $this->set_login($row);
         $this->ajax_success('登录成功', [], RGX\URL('index'));
     }
 

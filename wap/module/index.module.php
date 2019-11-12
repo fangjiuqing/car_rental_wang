@@ -52,6 +52,11 @@ class index_module extends base_module {
             }
         }
         $this->assign('agent_id' , $agent_id);
+
+        session_start();
+        if ( isset($_SESSION['user']) ) {
+            $this->assign('right_link' , '<a class="icon iconfont" href="' . RGX\router::url('order') . '">&#xe716;</a>');
+        }
         $this->display('index.tpl');
     }
 

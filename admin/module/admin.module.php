@@ -4,7 +4,6 @@ use re\rgx as RGX;
 
 /**
  * 模块基类
- * $Id: admin.module.php 931 2017-12-11 15:44:01Z fangwei $
  */
 class admin_module extends base_module {
 
@@ -14,8 +13,9 @@ class admin_module extends base_module {
      */
     public function __construct ($params = []) {
         parent::__construct($params);
-        if (empty($this->login)) {
-            //var_dump($_SESSION);die;
+        $this->admin = $this->sess_get('admin');
+
+        if (empty($this->admin)) {
             $this->redirect('login');
         }
         $this->get_navs($this->login);

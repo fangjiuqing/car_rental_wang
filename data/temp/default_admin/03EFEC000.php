@@ -35,9 +35,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
     <h5><i class="fa fa-support"></i> <?php echo($_pos['cur']);?></h5> <?php if ($_MODULE != 'tender'):?> <?php if ($_ACTION == 'index' || $_ACTION == 'list' || true):?> <?php if ($add_url):?> <a href="<?php echo($add_url);?>" class="btn btn-xs btn-success pull-right" id="add_rule_btn">
-	        <i class="fa fa-plus"></i> 新增 
+	        <i class="fa fa-plus"></i> 新增
 	    </a> <?php else:?> <a href="<?php echo(RGX\router::url('%s-add', $_MODULE)); ?>" class="btn btn-xs btn-success pull-right" id="add_rule_btn">
-	        <i class="fa fa-plus"></i> 新增 
+	        <i class="fa fa-plus"></i> 新增
 	    </a> <?php endif;?><?php endif;?><?php endif;?></div>
                     <div class="ibox-content"> <?php if (!empty($filter['configs'])):?>
 <div id="filter" class="row"><?php unset($k, $v); $k_index = 0; foreach ((array)$filter['configs'] as $k => $v): $k_index ++;?><?php if ($v['type'] == 'select'):?><div class="filter_row filter_<?php echo($v['input'] ? 'select_input' : 'select');?>">
@@ -73,7 +73,7 @@
                                         <th>订单金额</th>
                                         <th>订单详情</th>
                                         <th>订单状态</th>
-                                        <th>操作</th>
+                                        <th>下单日期</th>
                                     </tr>
                                 </thead>
                                 <tbody> <?php if (empty($list)):?> <tr>
@@ -96,11 +96,11 @@
                                             <p>取：<?php echo($v['order_start_time']);?> - 还：<?php echo($v['order_end_time']);?></p>
                                             <p>共计：<?php echo($v['order_duration_days']);?>天</p>
                                         </td>
-                                        <td><?php echo($order_type[$v['order_status']]);?></td>
+                                        <td>
+                                            <span class="btn btn-xs <?php if ($v['order_status'] == 1):?>btn-primary <?php elseif ($v['order_status'] == 2):?> btn-wanning <?php elseif ($v['order_status'] == 3):?> btn-default <?php elseif ($v['order_status'] == 4):?> btn-success <?php else:?> btn-default<?php endif;?>"> <?php echo($order_type[$v['order_status']]);?> </span>
+                                        </td>
 
-                                        <td class="order-operate"> <?php if ($v['order_status'] == 1):?> <a href="javascript:;" class="btn btn-xs btn-primary" data-oid="<?php echo($v['order_id']);?>" data-status="2">确认</a>
-
-                                            <a href="javascript:;" class="btn btn-xs btn-danger" data-oid="<?php echo($v['order_id']);?>" data-status="5">关闭</a> <?php endif;?><?php if ($v['order_status'] == 2):?> <a href="javascript:;" class="btn btn-xs btn-default" data-oid="<?php echo($v['order_id']);?>" data-status="3">使用中</a> <?php endif;?><?php if ($v['order_status'] == 3):?> <a href="javascript:;" class="btn btn-xs btn-success" data-oid="<?php echo($v['order_id']);?>" data-status="4">完成</a> <?php endif;?></td>
+                                        <td class="order-operate"> <?php echo($v['order_create_date']);?> </td>
                                     </tr> <?php endforeach;?> </tbody>
                             </table>
                         </div> <?php if ($pobj['total'] && $pobj['max'] > 1):?><ul class="pagination pagination-sm"><?php if ($pobj['prev']):?><li>

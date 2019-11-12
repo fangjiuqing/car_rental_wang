@@ -16,5 +16,4 @@ class index_module extends admin_module {
         $this->assign('nav', RGX\navigation_helper::get($this->login));
         $this->display('index.tpl');
     }
-
 }

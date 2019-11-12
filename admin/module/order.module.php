@@ -31,10 +31,8 @@ class order_module extends admin_module {
                         'label'     => '订单编号',
                     ],
                     'options'   => [
-                        'name'      => '订单编号',
-                        'title'     => '订单标题',
-                        'csn'       => '合同编号',
-                        'parta'     => '甲方名称',
+                        'no'      => '订单编号',
+                        'name'     => '订单标题',
                     ],
                     'input'     => [
                         'code'          => 'skey',
@@ -52,17 +50,11 @@ class order_module extends admin_module {
 
         if (!empty($filter['values']['skey'])) {
             // 按编号检索
-            if ($filter['values']['stype'] == 'name') {
+            if ($filter['values']['stype'] == 'no') {
                 $tab->where("order_no = '{$filter['values']['skey']}'");
             }
             if ($filter['values']['stype'] == 'title') {
                 $tab->where("order_title like '%{$filter['values']['skey']}%'");
-            }
-            if ($filter['values']['stype'] == 'csn') {
-                $tab->where("order_contrat_sn = '{$filter['values']['skey']}'");
-            }
-            if ($filter['values']['stype'] == 'parta') {
-                $tab->where("order_part_a_name like '%{$filter['values']['skey']}%'");
             }
         }
 
@@ -84,10 +76,11 @@ class order_module extends admin_module {
         });
 
         $pager = new RGX\page_helper($tab, $this->get('pn'), 24);
-        $this->assign('list' , $tab->get_all());
+        $this->assign('list' , $tab->order('order_create_date desc')->get_all());
         $this->assign('pobj', $pager->to_array());
         $this->assign('filter', $filter);
         $this->assign('order_type' , $order_type);
+
         $this->display('order/list.tpl');
     }
 

@@ -105,14 +105,14 @@
 </script>
 
 
-    <script src="http://static.geetest.com/static/tools/gt.js"></script>
+    <!-- <script src="http://static.geetest.com/static/tools/gt.js"></script> -->
     <script>
         if (top.location.href != location.href) {
             top.location.href = location.href;
         }
 
         var cur_dialog = null,
-            verfiy_success = false,
+            verfiy_success = true,
             handlerEmbed = function (captchaObj) {
 
                 captchaObj.appendTo("#embed-captcha");
@@ -127,7 +127,7 @@
                     $('#geetest_validate').val(validate.geetest_validate);
                     $('#geetest_seccode').val(validate.geetest_seccode);
 
-                    window.verfiy_success = true;
+                    window.verfiy_success = false;
                     window.cur_dialog.close();
                     RGX.exec_post('#login-form');
                 });

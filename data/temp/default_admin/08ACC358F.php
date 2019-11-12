@@ -41,7 +41,7 @@
                 <div class="dropdown profile-element">
                     <a href="javascript:;" data-href="<?php echo(RGX\router::url('account-add-id-%d' , $login['admin_id'])); ?>">
                         <span class="clear">
-                           <span class="block m-t-xs"><strong class="font-bold" style="font-size: 14px;"><?php echo($base['name']);?></strong></span>
+                           <span class="block m-t-xs"><strong class="font-bold" style="font-size: 14px;">在线租车</strong></span>
                            <span class="text-muted text-xs block" style="font-size: 12px;">&nbsp;</span>
                         </span>
                     </a>
@@ -121,12 +121,9 @@
                         </li>
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-user"></i> <?php echo($login['admin_nickname']);?> <span class="caret"></span></a>
+                                <i class="fa fa-user"></i> <?php echo($login['admin_realname']);?>admin<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu" style="min-width: 110px;">
 
-                                <li>
-                                    <a href="javascript:;" title="" style="font-size: 12px;"><?php echo($login['admin_group_label']);?></a>
-                                </li>
                                 <li>
                                     <a href="<?php echo(RGX\router::url('account-passwd')); ?>" class="J_menuItem" data-index="0">账号信息</a>
                                 </li>

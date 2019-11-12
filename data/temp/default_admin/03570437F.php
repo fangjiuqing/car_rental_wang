@@ -35,9 +35,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
     <h5><i class="fa fa-support"></i> <?php echo($_pos['cur']);?></h5> <?php if ($_MODULE != 'tender'):?> <?php if ($_ACTION == 'index' || $_ACTION == 'list' || true):?> <?php if ($add_url):?> <a href="<?php echo($add_url);?>" class="btn btn-xs btn-success pull-right" id="add_rule_btn">
-	        <i class="fa fa-plus"></i> 新增 
+	        <i class="fa fa-plus"></i> 新增
 	    </a> <?php else:?> <a href="<?php echo(RGX\router::url('%s-add', $_MODULE)); ?>" class="btn btn-xs btn-success pull-right" id="add_rule_btn">
-	        <i class="fa fa-plus"></i> 新增 
+	        <i class="fa fa-plus"></i> 新增
 	    </a> <?php endif;?><?php endif;?><?php endif;?></div>
                     <div class="ibox-content"> <?php if (!empty($filter['configs'])):?>
 <div id="filter" class="row"><?php unset($k, $v); $k_index = 0; foreach ((array)$filter['configs'] as $k => $v): $k_index ++;?><?php if ($v['type'] == 'select'):?><div class="filter_row filter_<?php echo($v['input'] ? 'select_input' : 'select');?>">

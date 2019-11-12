@@ -56,7 +56,7 @@
     'type' => 'mysql',
     'mysql' => 
     array (
-      'default' => 'host=127.0.0.1;port=3306;db=rentcar;user=root;passwd=;charset=utf8;profiling=1',
+      'default' => 'host=localhost;port=3306;db=rentcar;user=root;passwd=;charset=utf8;profiling=1',
     ),
   ),
   'sess' => 
@@ -69,6 +69,6 @@
   ),
   'CACHE_VER' => 2,
   'SYS_NAME' => '在线租车',
-  'ROOR_URL' => 'www./',
-  'upload_url' => 'http://localhost/zuchev1/data/attachment/',
+  'static_url' => 'https://case.isoftware.xyz/static/',
+  'upload_url' => 'https://case.isoftware.xyz/data/attachment/',
 );

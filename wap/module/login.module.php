@@ -8,6 +8,11 @@ class login_module extends base_module {
      * @return [type] [description]
      */
     public function index_action () {
+        session_start();
+        if ( empty($this->login) ) {
+            $this->redirect('order');
+        }
+
         $redirect = $this->get('redirect');
         $this->assign('redirect' , $redirect);
 
@@ -22,7 +27,7 @@ class login_module extends base_module {
      * @return [type] [description]
      */
     public function submit_action () {
-        $this->sess();
+        session_start();
         $result = [
             'code' => 500,
             'msg'  => '',
@@ -55,10 +60,13 @@ class login_module extends base_module {
         $redirect = $this->get('redirect' , 'p');
         if ( $redirect ) {
             $result['url']  =  $redirect;
+        }else{
+            $result['url']  = RGX\router::url('order');
         }
 
         $result['code'] = 200;
-        $this->set_login($user);
+        //$this->set_login($user);
+        $_SESSION['user'] = $user;
         $this->ajaxout($result);
     }
 
