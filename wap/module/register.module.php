@@ -22,7 +22,7 @@ class register_module extends base_module {
      * @return [type] [description]
      */
     public function submit_action () {
-        $this->sess();
+        session_start();
         $result = [
             'code' => 500,
             'msg'  => '',
@@ -50,7 +50,6 @@ class register_module extends base_module {
 
         $data['user_salt'] = mt_rand(100001,900009);
         $data['user_password'] = sha1(md5($data['user_password']) . $data['user_salt']);
-        $data['user_name'] = $data['user_mobile'];
         $data['user_register_date'] = date('Y-m-d H:i:s');
 
         $tab->load($data);
@@ -63,11 +62,14 @@ class register_module extends base_module {
 
             if ( $redirect ) {
                 $result['url']  =  $redirect;
+            }else{
+                $result['url']  =  RGX\router::url('index');
             }
 
         }
 
-        $this->set_login($data);
+        unset($data['user_salt'] , $data['user_password']);
+        $_SESSION['user'] = $data;
         $this->ajaxout($result);
     }
 
