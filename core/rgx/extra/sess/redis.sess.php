@@ -6,42 +6,42 @@ namespace re\rgx;
  * $Id: redis.sess.php 962 2017-12-25 01:30:07Z reginx $
  */
 class redis_sess extends sess {
-    
+
     /**
      * 存储域
      *
      * @var unknown_type
      */
     private $_uuid = null;
-    
+
     /**
      * Cookie key
      *
      * @var unknown_type
      */
     private $_ckey = '';
-    
+
     /**
      * Redis 操作对象
      *
      * @var unknown_type
      */
     private $_redis = null;
-    
+
     /**
      * GC 概率配置
      *
      * @var unknown_type
      */
     private $_gc    = array(1, 100);
-    
+
     /**
      * 默认生存周期
      *
      * @var unknown_type
      */
     private $_ttl   = 1800;
-    
+
     /**
      * 架构函数
      *
@@ -57,23 +57,25 @@ class redis_sess extends sess {
 
         $this->_redis = new \Redis();
         // connect
-        if ($this->_redis->connect($conf['host'], $conf['port'])) {
+        $host = isset($conf['host']) ? $conf['host'] : '127.0.0.1';
+        $port = isset($conf['port']) ? $conf['port'] : 6379;
+
+        $this->_redis->connect($host, $port);
+
+        if ( isset($conf['db']) ) {
             $this->_redis->select(intval($conf['db']));
-        }
-        else {
-            throw new exception(LANG('config error', 'Redis'), exception::CONFIG_ERROR);
         }
 
         // 域
         $this->_uuid = empty($sess_id) ? (isset($_COOKIE[$this->_ckey]) ? $_COOKIE[$this->_ckey] : '') : $sess_id;
         if (!preg_match('/^RS\d{1,3}\-[\w\-]+$/i', $this->_uuid)) {
-            // 新的 session 
-            $this->_uuid = 'RS' . sprintf('%03d-', explode('.', $_SERVER['SERVER_ADDR'])[0]) . 
+            // 新的 session
+            $this->_uuid = 'RS' . sprintf('%03d-', explode('.', $_SERVER['SERVER_ADDR'])[0]) .
                             md5(app::get_ip() . $_SERVER['HTTP_USER_AGENT'] . mt_rand(1000000, 9999999));
         }
         // 更新 session 开始时间
         $this->set('REX_DATE', REQUEST_TIME);
-        
+
         header("Cache-control: private"); // 使用http头控制缓存
         // 更新 cookie ttl , + 30min
         setcookie($this->_ckey, $this->_uuid, REQUEST_TIME + $this->_ttl , "/" , parent::get_domain());
@@ -109,7 +111,7 @@ class redis_sess extends sess {
         }
         $this->set('REX_DATE', REQUEST_TIME);
     }
-    
+
     /**
      * 获取 session ID
      *
@@ -118,7 +120,7 @@ class redis_sess extends sess {
     public function sess_id () {
         return $this->_uuid;
     }
-    
+
     /**
      * 获取当前配置信息
      *
@@ -131,7 +133,7 @@ class redis_sess extends sess {
             'expires'   => 1800
         );
     }
-    
+
     /**
      * 获取项目值
      *
@@ -148,7 +150,7 @@ class redis_sess extends sess {
         }
         return $ret;
     }
-    
+
     /**
      * 获取项目值
      *
@@ -162,7 +164,7 @@ class redis_sess extends sess {
         }
         return $this->_redis->hSet($this->_uuid, $key, $value);
     }
-    
+
     /**
      * 删除项目值
      *
@@ -173,7 +175,7 @@ class redis_sess extends sess {
     public function del ($key) {
         return $this->_redis->hDel($this->_uuid, $key);
     }
-    
+
     /**
      * 验证是否存在某项目
      *
@@ -183,7 +185,7 @@ class redis_sess extends sess {
     public function exists ($key) {
         return $this->_redis->hExists($this->_uuid, $key);
     }
-    
+
     /**
      * 销毁回话
      *

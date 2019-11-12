@@ -10,9 +10,14 @@ class base_module extends RGX\module {
      * [__construct description]
      */
      public function __construct ($params = []) {
+        session_start();
         parent::__construct($params);
-        $this->sess();
-        $this->login = $this->sess_get('login');
+        // $this->sess();
+        // $this->login = $this->sess_get('login');
+        //
+        if ( isset($_SESSION['user']) ) {
+            $this->assign('user' , $_SESSION['user']);
+        }
     }
 
     /**

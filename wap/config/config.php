@@ -6,6 +6,7 @@ return [
         'mysql'     => [
 
              'default'   => 'host=localhost;port=3306;db=rentcar;user=root;passwd=fang123wei;charset=utf8;profiling=1',
+             'default'   => 'host=localhost;port=3306;db=rentcar;user=root;passwd=;charset=utf8;profiling=1',
         ],
     ],
    'CACHE_VER'  => 2,

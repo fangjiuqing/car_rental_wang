@@ -93,14 +93,35 @@ class user_module extends admin_module {
         if ( !empty($data) ) {
             $user_id    =    intval($data['user_id']) ? : 0;
             $tab    =    RGX\OBJ('user_table');
-            $data['user_create_time'] = date('Y-m-d H:i:s');
+
+            if ( !$user_id ) {
+                $data['user_register_date'] = date('Y-m-d H:i:s');
+                if ( empty($data['user_password']) ) {
+                    $data['user_password'] = '123456';
+                }
+            }
+
+            if ( !empty($data['user_password']) ) {
+                if ( !$user_id ) {
+                    $salt = mt_rand(100001,900009);
+                    $data['user_salt'] = $salt;
+                }else{
+                    $user = $tab->where("user_id={$user_id}")->limit(1)->get();
+                    $salt = $user['user_salt'];
+                }
+
+                $data['user_password'] = sha1(md5($data['user_password']) . $salt);
+            }else{
+                unset($data['user_password']);
+            }
+
             $tab->load($data);
             $ret           =    $tab->save();
             if ( !$user_id ) {
                 $user_id = (int)$ret['row_id'];
             }
-            $ret['code'] =0;
-            $ret['url']    =    RGX\router::url('user-index');
+            $ret['code']  = 0;
+            $ret['url']   = RGX\router::url('user-index');
         }
         $this->ajaxout($ret);
     }

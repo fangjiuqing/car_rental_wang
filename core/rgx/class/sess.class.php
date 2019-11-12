@@ -14,13 +14,13 @@ abstract class sess {
      * @param unknown_type $key
      */
     abstract protected function get ($key);
-    
+
     /**
      * 获取当前配置信息 (sess_name, sess_id, expires)
      *
      */
     abstract protected function get_config ();
-    
+
     /**
      * 设置项目值
      *
@@ -28,34 +28,34 @@ abstract class sess {
      * @param unknown_type $value
      */
     abstract protected function set ($key, $value);
-    
+
     /**
      * 是否存在某项
      *
      * @param unknown_type $key
      */
     abstract protected function exists ($key);
-    
+
     /**
      * 获取回话ID
      *
      */
     abstract protected function sess_id ();
-    
+
     /**
      * 删除项目值
      *
      * @param unknown_type $key
      */
     abstract protected function del ($key);
-    
+
     /**
      * 删除会话
      *
      */
     abstract protected function remove ();
-    
-    
+
+
     /**
      * GC
      *

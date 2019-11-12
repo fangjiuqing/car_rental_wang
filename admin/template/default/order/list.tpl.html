@@ -18,7 +18,7 @@
                                         <th>订单金额</th>
                                         <th>订单详情</th>
                                         <th>订单状态</th>
-                                        <th>操作</th>
+                                        <th>下单日期</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,22 +46,14 @@
                                             <p>取：{$v['order_start_time']} - 还：{$v['order_end_time']}</p>
                                             <p>共计：{$v['order_duration_days']}天</p>
                                         </td>
-                                        <td>{$order_type[$v['order_status']]}</td>
+                                        <td>
+                                            <span class="btn btn-xs {if $v['order_status'] == 1}btn-primary {else if $v['order_status'] == 2} btn-wanning {else if $v['order_status'] == 3} btn-default {else if $v['order_status'] == 4} btn-success {else} btn-default{/if}">
+                                            {$order_type[$v['order_status']]}
+                                            </span>
+                                        </td>
 
                                         <td class="order-operate">
-                                            {if $v['order_status'] == 1}
-                                            <a href="javascript:;" class="btn btn-xs btn-primary" data-oid="{$v['order_id']}" data-status="2">确认</a>
-
-                                            <a href="javascript:;" class="btn btn-xs btn-danger" data-oid="{$v['order_id']}" data-status="5">关闭</a>
-                                            {/if}
-
-                                            {if $v['order_status'] == 2}
-                                            <a href="javascript:;" class="btn btn-xs btn-default" data-oid="{$v['order_id']}" data-status="3">使用中</a>
-                                            {/if}
-
-                                            {if $v['order_status'] == 3}
-                                            <a href="javascript:;" class="btn btn-xs btn-success" data-oid="{$v['order_id']}" data-status="4">完成</a>
-                                            {/if}
+                                            {$v['order_create_date']}
                                         </td>
                                     </tr>
                                     {/foreach}

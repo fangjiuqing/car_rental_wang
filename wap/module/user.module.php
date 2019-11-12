@@ -10,18 +10,20 @@ class user_module extends base_module {
      * @param array $params [description]
      */
     public function __construct ($params = []) {
+        session_start();
         parent::__construct($params);
-        $this->sess();
-        $this->login = $this->sess_get('login');
+        //$this->sess();
+        //$this->login = $this->sess_get('login');
 
         //$current_url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
         $current_url = $_SERVER['REQUEST_URI'];
 
+        $this->login = $_SESSION['user'];
         if ( empty($this->login) ) {
             $url = RGX\router::url('login-index-redirect-' . $current_url);
             $this->redirect('login-index-redirect-' . $current_url);
         }
-        //$this->login_user_id = 4;
+        $this->login_user_id = $_SESSION['user']['user_id'];
         $this->assign('user' , $this->login);
     }
 } // Class End

@@ -1,26 +1,82 @@
-<!--{include common/meta.inc}-->
+<?php namespace com\default_admin;use re\rgx as RGX;!defined('IN_RGX') && exit('Access Denied'); //unset($this);?><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title><?php echo((is_array($_title) ? join('_', $_title) : $_title));?></title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="http://localhost/zuchev1/admin/template/default/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="http://localhost/zuchev1/admin/static/font-awesome/css/font-awesome.css?v=4.7.0" rel="stylesheet">
+    <link href="http://localhost/zuchev1/admin/template/default/css/animate.min.css" rel="stylesheet">
+    <link href="http://localhost/zuchev1/admin/template/default/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="http://localhost/zuchev1/admin/template/default/css/bids.css?v=1.0.0" rel="stylesheet">
+    <script type="text/javascript">
+        var upload_image_url = '<?php echo(RGX\router::url('@upload-image')); ?>',
+            DATA_URL    = 'http://localhost/zuchev1/admin/data/',
+            STATIC_URL  = 'http://localhost/zuchev1/admin/static/',
+            UPLOAD_URL  = 'http://localhost/zuchev1/data/attachment/',
+            _route      = <?php echo(json_encode($route, JSON_UNESCAPED_UNICODE));?>,
+            _url        = '<?php echo($_MODULE);?>-<?php echo($_ACTION);?>',
+            _filter     = <?php echo(json_encode($filter['values'], JSON_UNESCAPED_UNICODE));?>,
+            filter      = <?php echo(json_encode($filter, JSON_UNESCAPED_UNICODE));?>;
+    </script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
-        <!--{// S_左侧导航开始 }-->
-        <!--{include common/left_nav.inc}-->
-        <!--{// E_左侧导航开始 }-->
-
-        <!--右侧部分开始-->
+<nav class="navbar-default navbar-static-side" role="navigation" style="width: 190px;">
+    <div class="nav-close">
+        <i class="fa fa-times-circle"></i>
+    </div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header" style="text-align: center">
+                <div class="dropdown profile-element">
+                    <a href="javascript:;" data-href="<?php echo(RGX\router::url('account-add-id-%d' , $login['admin_id'])); ?>">
+                        <span class="clear">
+                           <span class="block m-t-xs"><strong class="font-bold" style="font-size: 14px;">在线租车</strong></span>
+                           <span class="text-muted text-xs block" style="font-size: 12px;">&nbsp;</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element">HI</div>
+            </li> <?php unset($k, $v); $k_index = 0; foreach ((array)$navs as $k => $v): $k_index ++;?><?php if (!empty($v['urls'])):?><li>
+                    <a href="javascript:;">
+                        <span class="icon-span"><i class="<?php echo($v['icon']);?>"></i></span>
+                        <span class="nav-label"><?php echo($v['name']);?></span>
+                    </a>
+                    <ul class="nav nav-second-level"> <?php unset($sk, $sv); $sk_index = 0; foreach ((array)$v['urls'] as $sk => $sv): $sk_index ++;?> <li>
+                            <a class="J_menuItem" href="<?php echo(RGX\router::url($sv['url'])); ?>" data-index="<?php echo($sk);?>"><?php echo($sv['name']);?></a>
+                        </li> <?php endforeach;?> </ul>
+                </li><?php else:?><li>
+                    <a class="J_menuItem" href="<?php echo(RGX\router::url($v['url'])); ?>">
+                        <span class="icon-span"><i class="<?php echo($v['icon']);?>"></i></span>
+                        <span class="nav-label"><?php echo($v['name']);?></span>
+                    </a>
+                </li><?php endif;?><?php endforeach;?> </ul>
+    </div>
+</nav>
+<!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1" style="margin-left:190px;">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <ul class="nav navbar-top-links pull-left" id="nav-list">
                         <!-- <li class="hidden-xs">
-                            <a href="{url:'account-passwd'}" class="J_menuItem" data-index="0">
+                            <a href="<?php echo(RGX\router::url('account-passwd')); ?>" class="J_menuItem" data-index="0">
                                 <i class="fa fa-user"></i>
                             </a>
                         </li> -->
                     </ul>
                     <div class="navbar-header hide">
 
-                        <form role="search" class="navbar-form-custom" action="{url:'employee-list~'}" method="get" target="iframe0">
+                        <form role="search" class="navbar-form-custom" action="<?php echo(RGX\router::url('employee-list~')); ?>" method="get" target="iframe0">
                             <input type="hidden" name="stype" value="name">
                             <input type="hidden" name="status" value="4">
                             <div class="form-group">
@@ -65,15 +121,15 @@
                         </li>
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-user"></i>  {$login['admin_realname']}admin<span class="caret"></span></a>
+                                <i class="fa fa-user"></i> <?php echo($login['admin_realname']);?>admin<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu" style="min-width: 110px;">
 
                                 <li>
-                                    <a href="{url:'account-passwd'}" class="J_menuItem" data-index="0">账号信息</a>
+                                    <a href="<?php echo(RGX\router::url('account-passwd')); ?>" class="J_menuItem" data-index="0">账号信息</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="{url:'misc-logout'}" class="J_menuItem" data-index="0">注销登录</a>
+                                    <a href="<?php echo(RGX\router::url('misc-logout')); ?>" class="J_menuItem" data-index="0">注销登录</a>
                                 </li>
                             </ul>
                         </li>
@@ -105,26 +161,26 @@
                         </li>
                     </ul>
                 </div>
-                <a href="{url:'index-logout'}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="<?php echo(RGX\router::url('index-logout')); ?>" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="{url:'order-index'}" frameborder="0" data-id="index_home" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<?php echo(RGX\router::url('order-index')); ?>" frameborder="0" data-id="index_home" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->
     </div>
-    <script src="{__CTPL_URL__}js/jquery.min.js?v=2.1.4"></script>
-    <script src="{__CTPL_URL__}js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="{__CTPL_URL__}js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="{__CTPL_URL__}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="{__CTPL_URL__}js/plugins/layer/layer.min.js"></script>
-    <script src="{__CTPL_URL__}js/hplus.min.js?v=4.1.0"></script>
-    <script src="{__CTPL_URL__}js/contabs.min.js"></script>
-    <script src="{__CTPL_URL__}js/plugins/pace/pace.min.js"></script>
-    <script src="{__STATIC_URL__}js/RGX.lib.min.js"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/jquery.min.js?v=2.1.4"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/plugins/layer/layer.min.js"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/hplus.min.js?v=4.1.0"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/contabs.min.js"></script>
+    <script src="http://localhost/zuchev1/admin/template/default/js/plugins/pace/pace.min.js"></script>
+    <script src="http://localhost/zuchev1/admin/static/js/RGX.lib.min.js"></script>
     <script type="text/javascript">
         $(function(){
-            var nav = {$nav|json,encode},
+            var nav = <?php echo(json_encode($nav, JSON_UNESCAPED_UNICODE));?>,
                 nav_target = [];
             if ( nav.length > 0 ) {
                 var li = '';
@@ -182,5 +238,5 @@
         }
     </script>
     </body>
-<!--{include common/footer.inc}-->
+</html>
 
