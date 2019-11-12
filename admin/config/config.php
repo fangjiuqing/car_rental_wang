@@ -21,7 +21,7 @@ return [
       'charset'   => 'utf-8',
       'allow_php' => false
   ],
-  'upload_url'  => 'https://case.isoftware.xyz/data/attachment/',
+  'upload_url'  => 'https://case.isoftware.xyz/carrent/data/attachment/',
 ];
 
 //UPDATE mysql.user SET Password = PASSWORD('3yG8tL2mI') WHERE User = 'bdm289907605' limit 1;
