@@ -9,7 +9,7 @@ class login_module extends base_module {
      */
     public function index_action () {
         session_start();
-        if ( empty($this->login) ) {
+        if ( isset($_SESSION['user']) ) {
             $this->redirect('order');
         }
 
