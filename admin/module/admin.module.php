@@ -18,6 +18,7 @@ class admin_module extends base_module {
         if (empty($this->admin)) {
             $this->redirect('login');
         }
+        $this->assign('route', RGX\router::get_config());
         $this->get_navs($this->login);
     }
 
